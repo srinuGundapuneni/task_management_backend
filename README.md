@@ -37,3 +37,94 @@ Steps
 
 3.run the commands in terminal
 
+API endpoints list (with request & response examples) 
+
+The routes are mounted in server.js. Assume your Base URL is http://localhost:5000/
+
+
+POST /auth/login 
+Request Body:
+
+JSON
+
+{
+  "email": "jane@example.com",
+  "password": "password123"
+}
+Response (200 OK):
+
+JSON
+
+{
+  "success": true,
+  "data": {
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "role": "Manager",
+    "_id": "60a7d5e68b3c9d0015f8a002"
+   
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.Your.Generated.Token"
+}
+
+GET /auth/me (Private)
+Request Headers: Authorization: Bearer <YOUR_JWT_TOKEN>
+
+Response (200 OK):
+
+JSON
+
+{
+  "success": true,
+  "data": {
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "role": "Manager",
+    "_id": "60a7d5e68b3c9d0015f8a002",
+    "createdAt": "2025-11-28T10:00:00.000Z",
+    "updatedAt": "2025-11-28T10:00:00.000Z"
+  }
+}
+GET /employees/:id 
+Request Path: /employees/60a7d5e68b3c9d0015f8a003
+
+Response (200 OK):
+
+JSON
+
+{
+  "success": true,
+  "data": {
+    "name": "Bob Johnson",
+    "email": "bob@example.com",
+    "role": "Designer",
+    "_id": "60a7d5e68b3c9d0015f8a003",
+    "createdAt": "2025-11-28T10:00:00.000Z",
+    "updatedAt": "2025-11-28T10:00:00.000Z"
+  }
+}
+PUT /employees/:id 
+Request Path: /employees/60a7d5e68b3c9d0015f8a003 Request Headers: Authorization: Bearer <YOUR_JWT_TOKEN>
+
+Request Body (Only fields to update):
+
+JSON
+
+{
+  "role": "Lead Designer"
+}
+Response (200 OK):
+
+JSON
+
+{
+  "success": true,
+  "data": {
+    "name": "Bob Johnson",
+    "email": "bob@example.com",
+    "role": "Lead Designer",
+    "_id": "60a7d5e68b3c9d0015f8a003",
+    "createdAt": "2025-11-28T10:00:00.000Z",
+    "updatedAt": "2025-11-28T10:05:00.000Z"
+  }
+}
